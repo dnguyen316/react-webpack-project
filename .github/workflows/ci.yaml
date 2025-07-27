@@ -1,0 +1,39 @@
+name: PR Building and SonarQube
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+env: 
+  NODE_VERSION: 18
+
+defalts:
+  run:
+    shell: bash
+
+jobs:
+  # check-branch:
+  #   runs-on: [self-hosted]
+  #   name: Check base branch existed on sonarqube
+  #   steps:
+  #     - name:
+  #       id: check-sonarqube
+  #       uses: CPB/check-branch-from-sonarqube@v1
+  #       with:
+  #         sonar
+  pr-build:
+    runs-on: [self-hosted]
+    steps:
+      - name: Checkout base branch
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Test Coverage
+        run: npm run test:coverage
