@@ -8,22 +8,31 @@ on:
       - synchronize
 
 env: 
+  SONARQUBE_HOST: http://139.59.242.187:9000
+  SONARQUBE_PROJECT_KEY: react-jest
+  SONARQUBE_BASE_BRANCH_NAME: ${{ github.base_ref }} 
+  SONARQUBE_HEAD_BRANCH_NAME: ${{ github.head_ref }} 
+  SONARQUBE_PR_KEY: ${{ github.event.number || github.event.pull_request.number }}
   NODE_VERSION: 18
 
-defalts:
+defaults:
   run:
     shell: bash
 
 jobs:
-  # check-branch:
-  #   runs-on: [self-hosted]
-  #   name: Check base branch existed on sonarqube
-  #   steps:
-  #     - name:
-  #       id: check-sonarqube
-  #       uses: CPB/check-branch-from-sonarqube@v1
-  #       with:
-  #         sonar
+  check-branch:
+    runs-on: [self-hosted]
+    name: Check base branch existed on sonarqube
+    steps:
+      - name:
+        id: check-sonarqube
+        uses: CPB/check-branch-from-sonarqube@v1
+        with:
+          sonarqube-host: ${{ env.SONARQUBE_HOST }}
+          project-key: ${{ env.SONARQUBE_PR_KEY }}
+          branch: ${{ env.SONARQUBE_BASE_BRANCH_NAME }}
+    outputs:
+      check: ${{ steps.check-sonarqube.outputs.exists }}
   pr-build:
     runs-on: [self-hosted]
     steps:
