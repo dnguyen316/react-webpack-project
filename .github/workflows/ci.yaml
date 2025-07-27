@@ -10,7 +10,7 @@ on:
 env: 
   NODE_VERSION: 18
 
-defalts:
+defaults:
   run:
     shell: bash
 
