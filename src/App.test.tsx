@@ -7,6 +7,8 @@ describe('App', () => {
         render(<App/>)
         
         const title = screen.getByTestId('title');
-        expect(title).toBeInTheDocument()
+        expect(title).toBeInTheDocument();
+        const count = screen.getByTestId('count');
+        expect(count).toBeInTheDocument();
     })
 })
