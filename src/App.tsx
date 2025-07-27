@@ -9,7 +9,7 @@ function App() {
     <>
       <div>
         <h2 data-testid="title">Hello World</h2>
-        <p>{count}</p>
+        <p data-testid="count">{count}</p>
         <button onClick={() => setCount(count + 1)}>increase</button>
       </div>
     </>
