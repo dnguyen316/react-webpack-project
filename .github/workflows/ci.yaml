@@ -12,7 +12,7 @@ env:
   SONARQUBE_PROJECT_KEY: react-jest
   SONARQUBE_BASE_BRANCH_NAME: ${{ github.base_ref }} 
   SONARQUBE_HEAD_BRANCH_NAME: ${{ github.head_ref }} 
-  SONARQUBE_PR_KEY: ${{ github.event.number | github.event.pull_request.number }}
+  SONARQUBE_PR_KEY: ${{ github.event.number || github.event.pull_request.number }}
   NODE_VERSION: 18
 
 defaults:
