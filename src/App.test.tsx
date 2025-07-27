@@ -6,7 +6,7 @@ describe('App', () => {
     it('should render correctly', () => {
         render(<App/>)
         
-        const title = screen.getAllByRole('heading');
+        const title = screen.getByTestId('title');
         expect(title).toBeInTheDocument()
     })
 })
